@@ -11,6 +11,6 @@
     :builds [{
         :source-paths ["src/cljs"]
         :compiler {
-          :output-to "public/js/clockface.js"
+          :output-to "js/clockface.js"
           :optimizations :whitespace
           :pretty-print true}}]})
