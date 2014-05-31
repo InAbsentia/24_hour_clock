@@ -94,7 +94,7 @@
 
   (.beginPath context)
   (.translate context (point :x) (point :y))
-  (.fillText context number 0 0)
+  (.fillText context (goog.string/padNumber number, 2) 0 0)
 
   (.restore context))
 
