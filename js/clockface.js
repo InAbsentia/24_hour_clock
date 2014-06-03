@@ -24014,9 +24014,26 @@ cljs.core.special_symbol_QMARK_ = function special_symbol_QMARK_(x) {
 goog.provide("clock.face");
 goog.require("cljs.core");
 clock.face.state = cljs.core.atom.call(null, cljs.core.PersistentArrayMap.EMPTY);
+clock.face.window = function window__$1() {
+  var window__$1 = window;
+  return window__$1;
+};
 clock.face.canvas = function canvas() {
   var canvas__$1 = document.querySelector("#face");
   return canvas__$1;
+};
+clock.face.windowWidth = function windowWidth() {
+  return clock.face.window.call(null).innerWidth;
+};
+clock.face.windowHeight = function windowHeight() {
+  return clock.face.window.call(null).innerHeight;
+};
+clock.face.size = function size() {
+  return function() {
+    var x__3855__auto__ = clock.face.windowWidth.call(null);
+    var y__3856__auto__ = clock.face.windowHeight.call(null);
+    return x__3855__auto__ < y__3856__auto__ ? x__3855__auto__ : y__3856__auto__;
+  }() * 0.9;
 };
 clock.face.width = function width() {
   var width__$1 = clock.face.canvas.call(null).width;
@@ -24096,49 +24113,49 @@ clock.face.drawTick = function drawTick(number, context, center, radius) {
   return context.restore();
 };
 clock.face.drawTicks = function drawTicks(context, center, radius) {
-  var seq__4949 = cljs.core.seq.call(null, cljs.core.range.call(null, 60));
-  var chunk__4950 = null;
-  var count__4951 = 0;
-  var i__4952 = 0;
+  var seq__6284 = cljs.core.seq.call(null, cljs.core.range.call(null, 60));
+  var chunk__6285 = null;
+  var count__6286 = 0;
+  var i__6287 = 0;
   while (true) {
-    if (i__4952 < count__4951) {
-      var number = cljs.core._nth.call(null, chunk__4950, i__4952);
+    if (i__6287 < count__6286) {
+      var number = cljs.core._nth.call(null, chunk__6285, i__6287);
       clock.face.drawTick.call(null, number, context, center, radius - 2);
-      var G__4953 = seq__4949;
-      var G__4954 = chunk__4950;
-      var G__4955 = count__4951;
-      var G__4956 = i__4952 + 1;
-      seq__4949 = G__4953;
-      chunk__4950 = G__4954;
-      count__4951 = G__4955;
-      i__4952 = G__4956;
+      var G__6288 = seq__6284;
+      var G__6289 = chunk__6285;
+      var G__6290 = count__6286;
+      var G__6291 = i__6287 + 1;
+      seq__6284 = G__6288;
+      chunk__6285 = G__6289;
+      count__6286 = G__6290;
+      i__6287 = G__6291;
       continue;
     } else {
-      var temp__4092__auto__ = cljs.core.seq.call(null, seq__4949);
+      var temp__4092__auto__ = cljs.core.seq.call(null, seq__6284);
       if (temp__4092__auto__) {
-        var seq__4949__$1 = temp__4092__auto__;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__4949__$1)) {
-          var c__4297__auto__ = cljs.core.chunk_first.call(null, seq__4949__$1);
-          var G__4957 = cljs.core.chunk_rest.call(null, seq__4949__$1);
-          var G__4958 = c__4297__auto__;
-          var G__4959 = cljs.core.count.call(null, c__4297__auto__);
-          var G__4960 = 0;
-          seq__4949 = G__4957;
-          chunk__4950 = G__4958;
-          count__4951 = G__4959;
-          i__4952 = G__4960;
+        var seq__6284__$1 = temp__4092__auto__;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__6284__$1)) {
+          var c__4297__auto__ = cljs.core.chunk_first.call(null, seq__6284__$1);
+          var G__6292 = cljs.core.chunk_rest.call(null, seq__6284__$1);
+          var G__6293 = c__4297__auto__;
+          var G__6294 = cljs.core.count.call(null, c__4297__auto__);
+          var G__6295 = 0;
+          seq__6284 = G__6292;
+          chunk__6285 = G__6293;
+          count__6286 = G__6294;
+          i__6287 = G__6295;
           continue;
         } else {
-          var number = cljs.core.first.call(null, seq__4949__$1);
+          var number = cljs.core.first.call(null, seq__6284__$1);
           clock.face.drawTick.call(null, number, context, center, radius - 2);
-          var G__4961 = cljs.core.next.call(null, seq__4949__$1);
-          var G__4962 = null;
-          var G__4963 = 0;
-          var G__4964 = 0;
-          seq__4949 = G__4961;
-          chunk__4950 = G__4962;
-          count__4951 = G__4963;
-          i__4952 = G__4964;
+          var G__6296 = cljs.core.next.call(null, seq__6284__$1);
+          var G__6297 = null;
+          var G__6298 = 0;
+          var G__6299 = 0;
+          seq__6284 = G__6296;
+          chunk__6285 = G__6297;
+          count__6286 = G__6298;
+          i__6287 = G__6299;
           continue;
         }
       } else {
@@ -24161,49 +24178,49 @@ clock.face.drawNumbers = function drawNumbers(context, center, radius) {
   context.font = "20px sans-serif";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  var seq__4973_4981 = cljs.core.seq.call(null, cljs.core.range.call(null, 24));
-  var chunk__4974_4982 = null;
-  var count__4975_4983 = 0;
-  var i__4976_4984 = 0;
+  var seq__6308_6316 = cljs.core.seq.call(null, cljs.core.range.call(null, 24));
+  var chunk__6309_6317 = null;
+  var count__6310_6318 = 0;
+  var i__6311_6319 = 0;
   while (true) {
-    if (i__4976_4984 < count__4975_4983) {
-      var number_4985 = cljs.core._nth.call(null, chunk__4974_4982, i__4976_4984);
-      clock.face.drawNumber.call(null, number_4985 + 1, context, center, radius - 20, 24);
-      var G__4986 = seq__4973_4981;
-      var G__4987 = chunk__4974_4982;
-      var G__4988 = count__4975_4983;
-      var G__4989 = i__4976_4984 + 1;
-      seq__4973_4981 = G__4986;
-      chunk__4974_4982 = G__4987;
-      count__4975_4983 = G__4988;
-      i__4976_4984 = G__4989;
+    if (i__6311_6319 < count__6310_6318) {
+      var number_6320 = cljs.core._nth.call(null, chunk__6309_6317, i__6311_6319);
+      clock.face.drawNumber.call(null, number_6320 + 1, context, center, radius - 20, 24);
+      var G__6321 = seq__6308_6316;
+      var G__6322 = chunk__6309_6317;
+      var G__6323 = count__6310_6318;
+      var G__6324 = i__6311_6319 + 1;
+      seq__6308_6316 = G__6321;
+      chunk__6309_6317 = G__6322;
+      count__6310_6318 = G__6323;
+      i__6311_6319 = G__6324;
       continue;
     } else {
-      var temp__4092__auto___4990 = cljs.core.seq.call(null, seq__4973_4981);
-      if (temp__4092__auto___4990) {
-        var seq__4973_4991__$1 = temp__4092__auto___4990;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__4973_4991__$1)) {
-          var c__4297__auto___4992 = cljs.core.chunk_first.call(null, seq__4973_4991__$1);
-          var G__4993 = cljs.core.chunk_rest.call(null, seq__4973_4991__$1);
-          var G__4994 = c__4297__auto___4992;
-          var G__4995 = cljs.core.count.call(null, c__4297__auto___4992);
-          var G__4996 = 0;
-          seq__4973_4981 = G__4993;
-          chunk__4974_4982 = G__4994;
-          count__4975_4983 = G__4995;
-          i__4976_4984 = G__4996;
+      var temp__4092__auto___6325 = cljs.core.seq.call(null, seq__6308_6316);
+      if (temp__4092__auto___6325) {
+        var seq__6308_6326__$1 = temp__4092__auto___6325;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__6308_6326__$1)) {
+          var c__4297__auto___6327 = cljs.core.chunk_first.call(null, seq__6308_6326__$1);
+          var G__6328 = cljs.core.chunk_rest.call(null, seq__6308_6326__$1);
+          var G__6329 = c__4297__auto___6327;
+          var G__6330 = cljs.core.count.call(null, c__4297__auto___6327);
+          var G__6331 = 0;
+          seq__6308_6316 = G__6328;
+          chunk__6309_6317 = G__6329;
+          count__6310_6318 = G__6330;
+          i__6311_6319 = G__6331;
           continue;
         } else {
-          var number_4997 = cljs.core.first.call(null, seq__4973_4991__$1);
-          clock.face.drawNumber.call(null, number_4997 + 1, context, center, radius - 20, 24);
-          var G__4998 = cljs.core.next.call(null, seq__4973_4991__$1);
-          var G__4999 = null;
-          var G__5000 = 0;
-          var G__5001 = 0;
-          seq__4973_4981 = G__4998;
-          chunk__4974_4982 = G__4999;
-          count__4975_4983 = G__5000;
-          i__4976_4984 = G__5001;
+          var number_6332 = cljs.core.first.call(null, seq__6308_6326__$1);
+          clock.face.drawNumber.call(null, number_6332 + 1, context, center, radius - 20, 24);
+          var G__6333 = cljs.core.next.call(null, seq__6308_6326__$1);
+          var G__6334 = null;
+          var G__6335 = 0;
+          var G__6336 = 0;
+          seq__6308_6316 = G__6333;
+          chunk__6309_6317 = G__6334;
+          count__6310_6318 = G__6335;
+          i__6311_6319 = G__6336;
           continue;
         }
       } else {
@@ -24214,49 +24231,49 @@ clock.face.drawNumbers = function drawNumbers(context, center, radius) {
   context.font = "14px sans-serif";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  var seq__4977 = cljs.core.seq.call(null, cljs.core.range.call(null, 0, 60, 5));
-  var chunk__4978 = null;
-  var count__4979 = 0;
-  var i__4980 = 0;
+  var seq__6312 = cljs.core.seq.call(null, cljs.core.range.call(null, 0, 60, 5));
+  var chunk__6313 = null;
+  var count__6314 = 0;
+  var i__6315 = 0;
   while (true) {
-    if (i__4980 < count__4979) {
-      var number = cljs.core._nth.call(null, chunk__4978, i__4980);
+    if (i__6315 < count__6314) {
+      var number = cljs.core._nth.call(null, chunk__6313, i__6315);
       clock.face.drawNumber.call(null, number, context, center, radius - 45, 60);
-      var G__5002 = seq__4977;
-      var G__5003 = chunk__4978;
-      var G__5004 = count__4979;
-      var G__5005 = i__4980 + 1;
-      seq__4977 = G__5002;
-      chunk__4978 = G__5003;
-      count__4979 = G__5004;
-      i__4980 = G__5005;
+      var G__6337 = seq__6312;
+      var G__6338 = chunk__6313;
+      var G__6339 = count__6314;
+      var G__6340 = i__6315 + 1;
+      seq__6312 = G__6337;
+      chunk__6313 = G__6338;
+      count__6314 = G__6339;
+      i__6315 = G__6340;
       continue;
     } else {
-      var temp__4092__auto__ = cljs.core.seq.call(null, seq__4977);
+      var temp__4092__auto__ = cljs.core.seq.call(null, seq__6312);
       if (temp__4092__auto__) {
-        var seq__4977__$1 = temp__4092__auto__;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__4977__$1)) {
-          var c__4297__auto__ = cljs.core.chunk_first.call(null, seq__4977__$1);
-          var G__5006 = cljs.core.chunk_rest.call(null, seq__4977__$1);
-          var G__5007 = c__4297__auto__;
-          var G__5008 = cljs.core.count.call(null, c__4297__auto__);
-          var G__5009 = 0;
-          seq__4977 = G__5006;
-          chunk__4978 = G__5007;
-          count__4979 = G__5008;
-          i__4980 = G__5009;
+        var seq__6312__$1 = temp__4092__auto__;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__6312__$1)) {
+          var c__4297__auto__ = cljs.core.chunk_first.call(null, seq__6312__$1);
+          var G__6341 = cljs.core.chunk_rest.call(null, seq__6312__$1);
+          var G__6342 = c__4297__auto__;
+          var G__6343 = cljs.core.count.call(null, c__4297__auto__);
+          var G__6344 = 0;
+          seq__6312 = G__6341;
+          chunk__6313 = G__6342;
+          count__6314 = G__6343;
+          i__6315 = G__6344;
           continue;
         } else {
-          var number = cljs.core.first.call(null, seq__4977__$1);
+          var number = cljs.core.first.call(null, seq__6312__$1);
           clock.face.drawNumber.call(null, number, context, center, radius - 45, 60);
-          var G__5010 = cljs.core.next.call(null, seq__4977__$1);
-          var G__5011 = null;
-          var G__5012 = 0;
-          var G__5013 = 0;
-          seq__4977 = G__5010;
-          chunk__4978 = G__5011;
-          count__4979 = G__5012;
-          i__4980 = G__5013;
+          var G__6345 = cljs.core.next.call(null, seq__6312__$1);
+          var G__6346 = null;
+          var G__6347 = 0;
+          var G__6348 = 0;
+          seq__6312 = G__6345;
+          chunk__6313 = G__6346;
+          count__6314 = G__6347;
+          i__6315 = G__6348;
           continue;
         }
       } else {
@@ -24316,8 +24333,6 @@ clock.face.scheduleAnimation = function scheduleAnimation() {
   clock.face.frame = requestAnimationFrame(scheduleAnimation);
   return cljs.core.swap_BANG_.call(null, clock.face.state, cljs.core.assoc, new cljs.core.Keyword(null, "frame", "frame", 1111596255), clock.face.frame);
 };
-clock.face.start = function start() {
-  console.log("Starting");
-  return clock.face.scheduleAnimation.call(null);
-};
-clock.face.start.call(null);
+clock.face.canvas.call(null).width = clock.face.size.call(null);
+clock.face.canvas.call(null).height = clock.face.size.call(null);
+clock.face.scheduleAnimation.call(null);

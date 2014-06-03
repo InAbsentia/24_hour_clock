@@ -2,7 +2,15 @@
 
 (def state (atom {}))
 
+(defn window [] (let [window js/window] window))
+
 (defn canvas [] (let [canvas (.querySelector js/document "#face")] canvas))
+
+(defn windowWidth [] (.-innerWidth (window)))
+
+(defn windowHeight [] (.-innerHeight (window)))
+
+(defn size [] (* (min (windowWidth) (windowHeight)) 0.9))
 
 (defn width [] (let [width (. (canvas) -width)] width))
 
@@ -174,8 +182,8 @@
   (def frame (js/requestAnimationFrame scheduleAnimation))
   (swap! state assoc :frame frame))
 
-(defn start []
-  (.log js/console "Starting")
-  (scheduleAnimation))
 
-(start)
+(set! (.-width (canvas)) (size))
+(set! (.-height (canvas)) (size))
+
+(scheduleAnimation)
